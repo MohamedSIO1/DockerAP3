@@ -1,11 +1,33 @@
 version: '3.8'
+
 services:
   apache:
     container_name: apache
-    build:
-      context: ./docker
+    image: httpd
     ports:
       - 8080:80
     volumes:
-      - .:/var/www/html/
-      - ./docker/apache.conf:/etc/apache2/sites-available/000-default.conf
+      - ../:/usr/local/apache2/htdocs/
+      - ./apache/apache.conf:/usr/local/apache2/conf/httpd.conf
+  php:
+    container_name: php
+    build:
+      context: .
+    volumes:
+      - ../:/usr/local/apache2/htdocs/
+  mysql:
+    container_name: mysql
+    image: mysql
+    environment:
+      MYSQL_USER: app
+      MYSQL_DATABASE: all4sport
+      MYSQL_PASSWORD: All!4!spO0OR!!Tt
+      MYSQL_ROOT_PASSWORD: All!4!spO0OR!!Tt
+    ports:
+      - 3306:3306
+    volumes:
+      - data:/var/lib/mysql
+      - ./data/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+
+volumes:
+  data:
