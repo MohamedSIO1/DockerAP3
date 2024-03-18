@@ -10,5 +10,5 @@
 > [.env](/.env ".env") - contient les variables d'environnement de l'application
 
 > [!TIP]
-> Pour démarrer la conteneurisation : docker compose -f .\docker\docker-compose.yml up
+> Pour démarrer la conteneurisation : docker compose -f .\docker\docker-compose.yml up  
 > depuis le dossier DockerAP3
